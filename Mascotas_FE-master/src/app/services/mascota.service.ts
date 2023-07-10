@@ -8,9 +8,10 @@ import { Mascota } from '../interfaces/mascota';
   providedIn: 'root'
 })
 export class MascotaService {
-  private myAppUrl: string = environment.endpoint;
-  private myApiUrl: string = 'api/Mascota/';
-
+  //private myAppUrl: string = environment.endpoint;
+  //private myApiUrl: string = 'api/Mascota/';
+  private myAppUrl = 'https://localhost:7045/api';
+  private myApiUrl = 'api/Mascota/';
   constructor(private http: HttpClient) { }
 
   getMascotas(): Observable<Mascota[]> {
