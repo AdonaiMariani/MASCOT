@@ -1,0 +1,41 @@
+version: '3'
+services:
+  front:
+    build:
+      context: ./Mascotas_FE-master
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - mascotas-network
+
+  back:
+    build:
+      context: ./Mascotas_BE-master
+      dockerfile: Dockerfile
+    ports:
+      - 7045:7045
+    networks:
+      - mascotas-network
+    depends_on:
+      - db
+    environment:
+      - BACKEND_URL=http://back:7045 # URL del back en Docker Compose
+
+        
+  nginx:
+    image: nginx
+    ports:
+      - 8081:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - frontend
+    networks:
+      - mascotas-network
+
+networks:
+  mascotas-network:
+
+
+
